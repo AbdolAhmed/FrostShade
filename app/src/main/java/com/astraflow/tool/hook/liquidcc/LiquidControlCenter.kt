@@ -197,9 +197,10 @@ internal object LiquidControlCenter {
         CcGlassEnv.updateHighlight()
     }
 
-    /** 下拉面板收起(背景结束):不再读倾斜 */
+    /** 下拉面板收起或锁屏时归还系统背景。 */
     fun onShadeClosed() {
         GlassTilt.stop()
+        restoreAll()
     }
 
     /**
@@ -618,7 +619,7 @@ internal object LiquidControlCenter {
         runCatching { cls.getMethod("getViewRadius").takeIf { it.returnType == Float::class.javaPrimitiveType } }.getOrNull()
     }
 
-    /** 功能关掉时:还原原来的底子(只还仍是我们玻璃的那些;OPPO 已经换过的不动) */
+    /** 还原原来的底子(只还仍是我们玻璃的那些;OPPO 已经换过的不动) */
     fun restoreAll() {
         if (originals.isEmpty()) return
         for ((view, original) in originals.entries.toList()) {
