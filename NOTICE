@@ -1,0 +1,26 @@
+FrostShade
+
+FrostShade 的自有源代码采用 Mozilla Public License, version 2.0。
+完整许可见本仓库的 LICENSE。
+
+This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+第三方代码、工具及素材保留各自的许可、版权及权利声明。
+
+COUI Kit
+--------
+
+COUI Kit 的自有源代码采用 MPL-2.0。
+其第三方代码、图标和图像的权利说明见 third_party/coui-kit/NOTICE。
+完整许可见 third_party/coui-kit/LICENSE 及其中列出的许可文件。
+
+AndroidLiquidGlass / Backdrop
+-----------------------------
+
+上游项目见 https://github.com/Kyant0/AndroidLiquidGlass。
+Backdrop 依赖及 app/src/main/java/com/kyant/backdrop/catalog/utils/
+中沿用的上游代码采用 Apache License, Version 2.0。
+修改说明见相关源文件。许可正文见
+third_party/coui-kit/coui/src/main/resources/META-INF/coui-androidx-LICENSE。

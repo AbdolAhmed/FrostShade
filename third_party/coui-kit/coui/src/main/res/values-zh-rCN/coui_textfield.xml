@@ -1,0 +1,4 @@
+<resources>
+    <string name="coui_password_show">显示密码</string>
+    <string name="coui_password_hide">隐藏密码</string>
+</resources>
