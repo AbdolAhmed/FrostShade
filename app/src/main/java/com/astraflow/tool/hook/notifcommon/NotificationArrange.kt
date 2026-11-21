@@ -50,7 +50,7 @@ internal object NotificationArrange {
         val unitSize: Int = 1,
     )
 
-    /** 排好的一个单元:单元的标识(堆叠用的组键)和按顺序的成员 */
+    /** 排好的一个单元:该段的显示标识和按顺序的成员。 */
     class Run<T>(val key: String, val items: List<T>)
 
     /** 一条通知归到哪个单元:[ownKey] 与 [groupKey] 见 [Item] */
@@ -100,7 +100,8 @@ internal object NotificationArrange {
         }
         return out.map { u ->
             val members = if (grouping == GROUP_SYSTEM) u.members else u.members.sortedByDescending { it.postTime }
-            Run(u.key, members.map { it.value })
+            val displayKey = if (grouping == GROUP_APP) "app:${u.members.first().ownKey}" else u.key
+            Run(displayKey, members.map { it.value })
         }
     }
 

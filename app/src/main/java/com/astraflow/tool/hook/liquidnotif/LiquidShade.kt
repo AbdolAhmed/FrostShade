@@ -132,6 +132,7 @@ internal object LiquidShade {
     private var groups: List<LiquidEntries.ShadeGroup> = emptyList()
     private var listVersion = 0L
     private var shownVersion = -1L
+    private var shownSettings: LiquidSettings? = null
     private var shownKeys: List<String> = emptyList()
     private var sbnByKey: Map<String, StatusBarNotification> = emptyMap()
     private var lastDecorCheck = 0L
@@ -169,6 +170,7 @@ internal object LiquidShade {
     fun onListSeen(list: ViewGroup) {
         if (listRef?.get() === list) return
         if (active) deactivate()
+        if (backgroundOn) stopBackground()
         cards?.release()
         cards = null
         (background?.parent as? ViewGroup)?.removeView(background)
@@ -262,7 +264,7 @@ internal object LiquidShade {
         host.visibility = View.VISIBLE
         // 系统列表看不见(不改它自己的透明度,系统读到的仍是原值)
         list.transitionAlpha = 0f
-        if (shownVersion != listVersion) convert()
+        if (shownVersion != listVersion || shownSettings != ui.settings) convert()
         main.removeCallbacks(clockTick)
         main.postDelayed(clockTick, CLOCK_TICK_MS)
         LiquidLog.i("activated: background=$backgroundOn shade=$shadeFraction")
@@ -379,8 +381,7 @@ internal object LiquidShade {
                 .onFailure { LiquidLog.w("arrange failed", it) }
                 .getOrDefault(models)
             main.post {
-                if (version != listVersion) return@post
-                shownVersion = version
+                if (version != listVersion || s != ui.settings) return@post
                 val all = snapshot.flatMap { g -> g.items.map { it.sbn } }
                 shownKeys = all.map { it.key }
                 sbnByKey = all.associateBy { it.key }
@@ -389,6 +390,8 @@ internal object LiquidShade {
                 val animate = active && SystemClock.uptimeMillis() - activatedAt >= SETTLE_MS
                 val visible = if (animate) ui.list.layoutInfo.visibleItemsInfo.mapTo(HashSet()) { it.key } else emptySet()
                 ui.update(arranged, animate, visible)
+                shownVersion = version
+                shownSettings = s
                 markArrivals(before)
                 val keys = shownKeys.toSet()
                 ui.menu?.let { if (it.notification.key !in keys) ui.menu = null }
