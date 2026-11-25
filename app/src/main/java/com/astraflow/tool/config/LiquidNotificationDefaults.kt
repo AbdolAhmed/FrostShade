@@ -26,7 +26,7 @@ object LiquidNotificationDefaults {
      * 背景模糊程度(dp):安卓原版区域模糊的程度。0 为透明,看到的就是真实的桌面或应用;默认轻轻模糊
      * (用户 2026-09-26「模糊还是要有的，只不过我们是通过安卓原版给窗口设置模糊程度……把这个值也开放给用户」)
      */
-    val BACKGROUND_BLUR = IntItem(ConfigKeys.LIQUID_NOTIFICATION_BACKGROUND_BLUR, FrostStyle.BACKGROUND_BLUR_DP, 0, 40)
+    val BACKGROUND_BLUR = IntItem(ConfigKeys.LIQUID_NOTIFICATION_BACKGROUND_BLUR, FrostStyle.BACKGROUND_BLUR_DP, 0, 100)
 
     /** 背景压暗(百分比,蒙一层黑)。浅色模式也压暗:通知中心顶部的时间等系统文字是白色的 */
     val BACKGROUND_DIM_LIGHT = IntItem(ConfigKeys.LIQUID_NOTIFICATION_BACKGROUND_DIM_LIGHT, 10, 0, 80)
