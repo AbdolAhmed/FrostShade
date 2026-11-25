@@ -85,7 +85,7 @@ private fun SettingsPage(store: FrostSettingsStore) {
             Column(Modifier.padding(horizontal = 32.dp).padding(top = 18.dp, bottom = 5.dp)) {
                 Text(text = "FrostShade", kind = CouiTextKind.HomeTitle, textAlign = TextAlign.Start)
                 Text(
-                    text = "适用 ColorOS 15 和 16",
+                    text = "For ColorOS 15 and 16",
                     kind = CouiTextKind.ItemSummary,
                     color = CouiTheme.colorScheme.onSurfaceVariant,
                 )
@@ -93,7 +93,7 @@ private fun SettingsPage(store: FrostSettingsStore) {
         }
         item("coolapk") {
             Group {
-                ValueRow("酷安", "穆远星") {
+                ValueRow("Coolapk", "MuYuanXing") {
                     runCatching {
                         context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.coolapk.com/u/28719807")))
                     }
@@ -101,60 +101,60 @@ private fun SettingsPage(store: FrostSettingsStore) {
             }
         }
         item("switches") {
-            Group(title = "开启范围") {
+            Group(title = "Enabled for") {
                 val notifications = values[ConfigKeys.LIQUID_NOTIFICATION_ENABLED] as? Boolean ?: true
-                ToggleRow("磨砂堆叠通知", notifications) { store.set(ConfigKeys.LIQUID_NOTIFICATION_ENABLED, it) }
+                ToggleRow("Frosted stacked notifications", notifications) { store.set(ConfigKeys.LIQUID_NOTIFICATION_ENABLED, it) }
                 Divider()
                 val controls = values[ConfigKeys.LIQUID_CONTROL_CENTER_ENABLED] as? Boolean ?: true
-                ToggleRow("磨砂控制中心", controls) { store.set(ConfigKeys.LIQUID_CONTROL_CENTER_ENABLED, it) }
+                ToggleRow("Frosted control center", controls) { store.set(ConfigKeys.LIQUID_CONTROL_CENTER_ENABLED, it) }
             }
         }
         item("video") {
             OriginalPreview(Modifier.padding(horizontal = CouiPageDefaults.horizontalMargin).padding(top = 12.dp))
         }
         item("background") {
-            Group(title = "背景") {
-                SettingSlider("背景模糊程度", Notifications.BACKGROUND_BLUR, values, store, " dp")
-                SettingSlider("背景压暗（浅色模式）", Notifications.BACKGROUND_DIM_LIGHT, values, store)
-                SettingSlider("背景压暗（深色模式）", Notifications.BACKGROUND_DIM_DARK, values, store)
-                SettingSlider("背后较亮时加深", Notifications.BACKGROUND_BRIGHT_EXTRA, values, store)
-                SettingSlider("顶部加深", Notifications.BACKGROUND_TOP_DIM, values, store)
+            Group(title = "Background") {
+                SettingSlider("Background blur", Notifications.BACKGROUND_BLUR, values, store, " dp")
+                SettingSlider("Background dim (light mode)", Notifications.BACKGROUND_DIM_LIGHT, values, store)
+                SettingSlider("Background dim (dark mode)", Notifications.BACKGROUND_DIM_DARK, values, store)
+                SettingSlider("Darken when bright behind", Notifications.BACKGROUND_BRIGHT_EXTRA, values, store)
+                SettingSlider("Top darken", Notifications.BACKGROUND_TOP_DIM, values, store)
             }
         }
         item("glass") {
-            Group(title = "玻璃与光效") {
-                SettingSlider("表面白色浓度（浅色模式）", Notifications.SURFACE_LIGHT, values, store)
-                SettingSlider("表面白色浓度（深色模式）", Notifications.SURFACE_DARK, values, store)
-                SettingSlider("阴影", Notifications.SHADOW, values, store)
-                SettingSlider("亮边强度", Notifications.HIGHLIGHT, values, store)
-                ToggleRow("亮边随手机倾斜转动", on(Notifications.HIGHLIGHT_TILT)) { store.set(Notifications.HIGHLIGHT_TILT.key, it) }
+            Group(title = "Glass and light") {
+                SettingSlider("Surface white density (light mode)", Notifications.SURFACE_LIGHT, values, store)
+                SettingSlider("Surface white density (dark mode)", Notifications.SURFACE_DARK, values, store)
+                SettingSlider("Shadow", Notifications.SHADOW, values, store)
+                SettingSlider("Edge highlight strength", Notifications.HIGHLIGHT, values, store)
+                ToggleRow("Edge highlight follows phone tilt", on(Notifications.HIGHLIGHT_TILT)) { store.set(Notifications.HIGHLIGHT_TILT.key, it) }
                 Divider()
-                ToggleRow("按住时发光", on(Notifications.PRESS_GLOW)) { store.set(Notifications.PRESS_GLOW.key, it) }
+                ToggleRow("Glow on press", on(Notifications.PRESS_GLOW)) { store.set(Notifications.PRESS_GLOW.key, it) }
                 Divider()
-                ToggleRow("流光", on(Notifications.FLOW_LIGHT)) { store.set(Notifications.FLOW_LIGHT.key, it) }
+                ToggleRow("Shimmer", on(Notifications.FLOW_LIGHT)) { store.set(Notifications.FLOW_LIGHT.key, it) }
                 Divider()
-                ToggleRow("氛围光", on(Notifications.AMBIENT_GLOW)) { store.set(Notifications.AMBIENT_GLOW.key, it) }
+                ToggleRow("Ambient light", on(Notifications.AMBIENT_GLOW)) { store.set(Notifications.AMBIENT_GLOW.key, it) }
             }
         }
         item("cards") {
-            Group(title = "通知卡片") {
-                SettingSlider("卡片宽度", Notifications.CARD_WIDTH, values, store)
-                SettingSlider("卡片大小", Notifications.CARD_SCALE, values, store)
-                ToggleRow("置顶与左滑选项", on(Notifications.SWIPE_OPTIONS)) { store.set(Notifications.SWIPE_OPTIONS.key, it) }
+            Group(title = "Notification cards") {
+                SettingSlider("Card width", Notifications.CARD_WIDTH, values, store)
+                SettingSlider("Card size", Notifications.CARD_SCALE, values, store)
+                ToggleRow("Pin and swipe-left options", on(Notifications.SWIPE_OPTIONS)) { store.set(Notifications.SWIPE_OPTIONS.key, it) }
             }
         }
         item("stack") {
-            Group(title = "通知堆叠") {
-                ToggleRow("堆叠显示", on(Notifications.STACK)) { store.set(Notifications.STACK.key, it) }
+            Group(title = "Notification stack") {
+                ToggleRow("Stacked display", on(Notifications.STACK)) { store.set(Notifications.STACK.key, it) }
                 if (on(Notifications.STACK)) {
                     Divider()
-                    ChoiceRow("叠放范围", listOf("同一组", "同一应用", "全部通知"), number(Notifications.GROUPING)) {
+                    ChoiceRow("Stack range", listOf("Same group", "Same app", "All notifications"), number(Notifications.GROUPING)) {
                         store.set(Notifications.GROUPING.key, it)
                     }
-                    SettingSlider("后方显示层数", Notifications.STACK_LAYERS, values, store, " 层")
-                    SettingSlider("每层露出高度", Notifications.STACK_PEEK, values, store, " dp")
-                    SettingSlider("后方每层宽度", Notifications.STACK_SCALE, values, store)
-                    SettingSlider("后方每层压暗", Notifications.STACK_DIM, values, store)
+                    SettingSlider("Layers shown behind", Notifications.STACK_LAYERS, values, store, " layers")
+                    SettingSlider("Exposed height per layer", Notifications.STACK_PEEK, values, store, " dp")
+                    SettingSlider("Width of each layer behind", Notifications.STACK_SCALE, values, store)
+                    SettingSlider("Dim per layer behind", Notifications.STACK_DIM, values, store)
                 }
             }
         }
@@ -163,26 +163,26 @@ private fun SettingsPage(store: FrostSettingsStore) {
             BadgeSettings(badge) { store.set(Notifications.BADGE.key, it.encode()) }
         }
         item("sort") {
-            Group(title = "通知排序") {
-                ToggleRow("分区内排序", on(Notifications.SORT_ENABLED)) { store.set(Notifications.SORT_ENABLED.key, it) }
+            Group(title = "Notification sorting") {
+                ToggleRow("Sort within group", on(Notifications.SORT_ENABLED)) { store.set(Notifications.SORT_ENABLED.key, it) }
                 if (on(Notifications.SORT_ENABLED)) {
                     Divider()
                     val primary = number(Notifications.SORT_PRIMARY)
-                    ChoiceRow("排序依据", listOf("卡片高度", "发出时间", "应用名", "重要性"), primary) {
+                    ChoiceRow("Sort by", listOf("Card height", "Time sent", "App name", "Importance"), primary) {
                         store.set(Notifications.SORT_PRIMARY.key, it)
                     }
                     Divider()
                     val orders = listOf(
-                        listOf("高度从高到低", "高度从低到高"),
-                        listOf("时间从新到旧", "时间从旧到新"),
-                        listOf("A 到 Z", "Z 到 A"),
-                        listOf("重要性从高到低", "重要性从低到高"),
+                        listOf("Height, high to low", "Height, low to high"),
+                        listOf("Time, newest first", "Time, oldest first"),
+                        listOf("A to Z", "Z to A"),
+                        listOf("Importance, high to low", "Importance, low to high"),
                     )
-                    ChoiceRow("排序方向", orders[primary], if (on(Notifications.SORT_DESC)) 1 else 0) {
+                    ChoiceRow("Sort order", orders[primary], if (on(Notifications.SORT_DESC)) 1 else 0) {
                         store.set(Notifications.SORT_DESC.key, it == 1)
                     }
                     Divider()
-                    ToggleRow("优先显示可堆叠通知", on(Notifications.SORT_STACKED_FIRST)) {
+                    ToggleRow("Show stackable notifications first", on(Notifications.SORT_STACKED_FIRST)) {
                         store.set(Notifications.SORT_STACKED_FIRST.key, it)
                     }
                     Divider()
@@ -191,28 +191,28 @@ private fun SettingsPage(store: FrostSettingsStore) {
             }
         }
         item("controls") {
-            Group(title = "控制中心") {
-                ToggleRow("浅色模式下额外压暗", on(Controls.DIM_LIGHT_ENABLED)) {
+            Group(title = "Control center") {
+                ToggleRow("Extra dimming in light mode", on(Controls.DIM_LIGHT_ENABLED)) {
                     store.set(Controls.DIM_LIGHT_ENABLED.key, it)
                 }
                 if (on(Controls.DIM_LIGHT_ENABLED)) {
-                    SettingSlider("压暗程度", Controls.DIM_LIGHT, values, store)
+                    SettingSlider("Dim amount", Controls.DIM_LIGHT, values, store)
                 }
             }
         }
         item("reset") {
             Group {
-                Item(onClick = { reset = true }) { Text(text = "恢复默认设置", kind = CouiTextKind.ItemTitle) }
+                Item(onClick = { reset = true }) { Text(text = "Restore defaults", kind = CouiTextKind.ItemTitle) }
             }
         }
     }
     if (reset) {
         Dialog(
-            title = "恢复默认设置",
-            message = "将外观、堆叠和排序恢复为默认值。",
+            title = "Restore defaults",
+            message = "Restore appearance, stacking and sorting to default values.",
             onDismissRequest = { reset = false },
-            dismissAction = CouiDialogAction("取消", { reset = false }),
-            confirmAction = CouiDialogAction("恢复", {
+            dismissAction = CouiDialogAction("Cancel", { reset = false }),
+            confirmAction = CouiDialogAction("Restore", {
                 store.resetAppearance()
                 reset = false
             }),
@@ -270,7 +270,7 @@ private fun ChoiceRow(title: String, labels: List<String>, selected: Int, change
         Dialog(
             title = title,
             onDismissRequest = { shown = false },
-            confirmAction = CouiDialogAction("关闭", { shown = false }),
+            confirmAction = CouiDialogAction("Close", { shown = false }),
         ) {
             labels.forEachIndexed { index, label ->
                 Item(
@@ -284,19 +284,19 @@ private fun ChoiceRow(title: String, labels: List<String>, selected: Int, change
 
 @Composable
 private fun BadgeSettings(badge: NotificationBadgeSpec, change: (NotificationBadgeSpec) -> Unit) {
-    Group(title = "数量角标") {
-        ToggleRow("显示数量角标", badge.enabled) { change(badge.copy(enabled = it)) }
+    Group(title = "Count badge") {
+        ToggleRow("Show count badge", badge.enabled) { change(badge.copy(enabled = it)) }
         if (badge.enabled) {
             Divider()
-            ChoiceRow("数字含义", listOf("组内全部通知数", "组内未显示通知数"), badge.mode) { change(badge.copy(mode = it)) }
+            ChoiceRow("Number meaning", listOf("All notifications in group", "Hidden notifications in group"), badge.mode) { change(badge.copy(mode = it)) }
             Divider()
-            ChoiceRow("角标位置", listOf("左上", "右上", "左下", "右下"), badge.corner) { change(badge.copy(corner = it)) }
-            NumberSlider("字号", badge.textSp, NotificationBadgeSpec.TEXT_SP_RANGE, " sp") { change(badge.copy(textSp = it)) }
-            NumberSlider("内边距", badge.paddingDp, NotificationBadgeSpec.PADDING_DP_RANGE, " dp") { change(badge.copy(paddingDp = it)) }
-            NumberSlider("角标圆角", badge.radiusDp, NotificationBadgeSpec.RADIUS_DP_RANGE, " dp") { change(badge.copy(radiusDp = it)) }
-            NumberSlider("边距", badge.marginDp, NotificationBadgeSpec.MARGIN_DP_RANGE, " dp") { change(badge.copy(marginDp = it)) }
-            BadgeColor("背景颜色", badge.bgColor) { change(badge.copy(bgColor = it)) }
-            BadgeColor("文字颜色", badge.textColor) { change(badge.copy(textColor = it)) }
+            ChoiceRow("Badge position", listOf("Top left", "Top right", "Bottom left", "Bottom right"), badge.corner) { change(badge.copy(corner = it)) }
+            NumberSlider("Text size", badge.textSp, NotificationBadgeSpec.TEXT_SP_RANGE, " sp") { change(badge.copy(textSp = it)) }
+            NumberSlider("Padding", badge.paddingDp, NotificationBadgeSpec.PADDING_DP_RANGE, " dp") { change(badge.copy(paddingDp = it)) }
+            NumberSlider("Badge corner radius", badge.radiusDp, NotificationBadgeSpec.RADIUS_DP_RANGE, " dp") { change(badge.copy(radiusDp = it)) }
+            NumberSlider("Margin", badge.marginDp, NotificationBadgeSpec.MARGIN_DP_RANGE, " dp") { change(badge.copy(marginDp = it)) }
+            BadgeColor("Background color", badge.bgColor) { change(badge.copy(bgColor = it)) }
+            BadgeColor("Text color", badge.textColor) { change(badge.copy(textColor = it)) }
         }
     }
 }
@@ -314,9 +314,9 @@ private fun BadgeColor(title: String, color: Int, change: (Int) -> Unit) {
         onValueChange = { input = it },
         onDismissRequest = { input = null },
         placeholder = "#AARRGGBB",
-        clearContentDescription = "清除",
-        dismissAction = CouiDialogAction("取消", { input = null }),
-        confirmAction = CouiDialogAction("保存", {
+        clearContentDescription = "Clear",
+        dismissAction = CouiDialogAction("Cancel", { input = null }),
+        confirmAction = CouiDialogAction("Save", {
             if (parsed != null) change(parsed)
             input = null
         }, enabled = parsed != null),
@@ -327,7 +327,7 @@ private fun BadgeColor(title: String, color: Int, change: (Int) -> Unit) {
 private fun PriorityAppsRow(stored: String, change: (String) -> Unit) {
     val chosen = stored.lines().filter { it.isNotBlank() }
     var draft by remember { mutableStateOf<List<String>?>(null) }
-    ValueRow("选择优先应用", if (chosen.isEmpty()) "未选择" else "${chosen.size} 个") { draft = chosen }
+    ValueRow("Choose priority apps", if (chosen.isEmpty()) "None selected" else "${chosen.size} selected") { draft = chosen }
     val selection = draft ?: return
     val context = LocalContext.current
     val apps by produceState<List<Pair<String, String>>?>(null) {
@@ -341,17 +341,17 @@ private fun PriorityAppsRow(stored: String, change: (String) -> Unit) {
         }
     }
     Dialog(
-        title = "选择优先应用",
+        title = "Choose priority apps",
         onDismissRequest = { draft = null },
-        dismissAction = CouiDialogAction("取消", { draft = null }),
-        confirmAction = CouiDialogAction("保存", {
+        dismissAction = CouiDialogAction("Cancel", { draft = null }),
+        confirmAction = CouiDialogAction("Save", {
             change(selection.joinToString("\n"))
             draft = null
         }),
     ) {
         val available = apps
         if (available == null) {
-            Footer(text = "正在读取应用")
+            Footer(text = "Loading apps")
         } else {
             val labels = available.toMap()
             val ordered = selection.map { it to (labels[it] ?: it) } + available.filter { it.first !in selection }
