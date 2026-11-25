@@ -12,7 +12,7 @@ import com.astraflow.tool.hook.notifcommon.NotificationArrange
 internal object LiquidArrange {
 
     /** 全部通知叠为一组时的组名(展开后标题行显示) */
-    private const val ALL_LABEL = "全部通知"
+    private const val ALL_LABEL = "All notifications"
 
     fun arrange(groups: List<LiquidGroup>, settings: LiquidSettings): List<LiquidGroup> {
         val grouping = settings.grouping
