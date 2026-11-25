@@ -32,7 +32,7 @@ internal fun OriginalPreview(modifier: Modifier = Modifier) {
         onRelease = { it.release() },
         modifier = modifier.fillMaxWidth().aspectRatio(1164f / 1100f)
             .clip(CouiPageDefaults.shape).background(CouiTheme.colorScheme.card)
-            .semantics { contentDescription = "旧版液态玻璃堆叠通知原版视频" },
+            .semantics { contentDescription = "Original video of the old liquid glass stacked notifications" },
     )
 }
 
