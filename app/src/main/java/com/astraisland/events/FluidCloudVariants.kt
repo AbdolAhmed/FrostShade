@@ -7,9 +7,9 @@ object FluidCloudVariants {
     data class Variant(val major: Int, val packageName: String, val name: String)
 
     val ALL = listOf(
-        Variant(15, "com.astraflow.fluidcloud.c15", "流体云事件接入 · C15"),
-        Variant(16, "com.astraflow.fluidcloud.c16", "流体云事件接入 · C16"),
-        Variant(17, "com.astraflow.fluidcloud.c17", "流体云事件接入 · C17"),
+        Variant(15, "com.astraflow.fluidcloud.c15", "Fluid cloud event access · C15"),
+        Variant(16, "com.astraflow.fluidcloud.c16", "Fluid cloud event access · C16"),
+        Variant(17, "com.astraflow.fluidcloud.c17", "Fluid cloud event access · C17"),
     )
 
     const val RELEASE_PROPERTY = "ro.build.version.oplusrom"
