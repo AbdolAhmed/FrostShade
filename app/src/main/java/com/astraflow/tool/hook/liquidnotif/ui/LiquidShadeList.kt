@@ -974,7 +974,7 @@ private fun GroupHeader(
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )
-        GlassPill("收起", env, onCollapse)
+        GlassPill("Collapse", env, onCollapse)
         if (onClear != null) {
             Spacer(Modifier.width(8.dp))
             GlassClose(env, onClear)
@@ -1168,7 +1168,7 @@ private fun CardColumn(
                 Column {
                     Spacer(Modifier.height(10.dp))
                     ReplyBox(
-                        hint = target.action.replyHint ?: "回复",
+                        hint = target.action.replyHint ?: "Reply",
                         env = env,
                         callbacks = callbacks,
                         onSend = { text -> callbacks.reply(n, target.action, text) },
@@ -1396,7 +1396,7 @@ private fun ReplyBox(
                 .padding(horizontal = 14.dp),
             contentAlignment = Alignment.Center,
         ) {
-            BasicText("发送", style = textStyle(fonts.medium, 14f, 1.2f, lerpColor(look.secondary, look.title, ready), null))
+            BasicText("Send", style = textStyle(fonts.medium, 14f, 1.2f, lerpColor(look.secondary, look.title, ready), null))
         }
         Spacer(Modifier.width(6.dp))
         val closePress = remember { Animatable(0f) }
@@ -1469,7 +1469,7 @@ private fun MenuLayer(state: LiquidUiState, env: CardEnv, callbacks: LiquidCallb
                                 }),
                         ) {
                             BasicText(
-                                "通知设置",
+                                "Notification settings",
                                 modifier = Modifier.padding(horizontal = 20.dp, vertical = 14.dp),
                                 style = textStyle(env.fonts.medium, 15f, 1.3f, look.title, look.textShadow),
                             )
@@ -1480,12 +1480,12 @@ private fun MenuLayer(state: LiquidUiState, env: CardEnv, callbacks: LiquidCallb
                         val n = shown.notification
                         Box(grown.liquidGlass(env.glass, MenuShape, press = { 0f })) {
                             Column(Modifier.width(IntrinsicSize.Max)) {
-                                MenuRow(if (state.isPinned(n)) "取消置顶" else "置顶", env) {
+                                MenuRow(if (state.isPinned(n)) "Unpin" else "Pin", env) {
                                     state.menu = null
                                     state.togglePin(listOf(n))
                                 }
                                 Box(Modifier.fillMaxWidth().height(0.5.dp).background(look.chip))
-                                MenuRow("通知设置", env) {
+                                MenuRow("Notification settings", env) {
                                     state.menu = null
                                     callbacks.settings(n)
                                 }
@@ -1793,8 +1793,8 @@ private val OPTIONS_GAP = 10.dp
 @Composable
 private fun SwipeOptions(env: CardEnv, pinned: Boolean, onPin: () -> Unit, onSettings: () -> Unit) {
     Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
-        GlassPill(if (pinned) "取消置顶" else "置顶", env, onPin)
-        GlassPill("设置", env, onSettings)
+        GlassPill(if (pinned) "Unpin" else "Pin", env, onPin)
+        GlassPill("Settings", env, onSettings)
     }
 }
 
@@ -1924,9 +1924,9 @@ private fun Modifier.fadeEdges(top: Dp, bottom: Dp): Modifier = this
 internal fun relativeTime(postTime: Long, now: Long): String {
     val minutes = ((now - postTime) / 60_000L).coerceAtLeast(0L)
     return when {
-        minutes < 1 -> "刚刚"
-        minutes < 60 -> "${minutes}分钟前"
-        minutes < 24 * 60 -> "${minutes / 60}小时前"
-        else -> SimpleDateFormat("M月d日", Locale.CHINA).format(Date(postTime))
+        minutes < 1 -> "Just now"
+        minutes < 60 -> "${minutes}m ago"
+        minutes < 24 * 60 -> "${minutes / 60}h ago"
+        else -> SimpleDateFormat("MMM d", Locale.getDefault()).format(Date(postTime))
     }
 }
