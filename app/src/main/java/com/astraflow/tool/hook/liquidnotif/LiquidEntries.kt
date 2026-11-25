@@ -283,7 +283,7 @@ internal class LiquidEntries(private val context: Context, private val onIconRea
             title = label,
             icon = icon,
             intent = a.actionIntent,
-            replyHint = input?.let { it.label?.toString()?.trim()?.ifEmpty { null } ?: label.ifEmpty { "回复" } },
+            replyHint = input?.let { it.label?.toString()?.trim()?.ifEmpty { null } ?: label.ifEmpty { "Reply" } },
             index = index,
         )
     }
