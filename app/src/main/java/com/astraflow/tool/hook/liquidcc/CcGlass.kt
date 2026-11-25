@@ -118,7 +118,7 @@ internal object CcGlassEnv {
      */
     fun prepare(context: Context) {
         val res = context.resources
-        attrActive = res.getIdentifier("state_active", "attr", SYSTEM_UI)
+        attrActive = res.getIdentifier("state_active", "attr", SYSTEM_UI).takeIf { it != 0 } ?: android.R.attr.state_activated
         attrUnavailable = res.getIdentifier("state_unavailable", "attr", SYSTEM_UI)
         attrInoperable = res.getIdentifier("state_inoperable", "attr", SYSTEM_UI)
         val primary = res.getIdentifier("couiColorPrimary", "attr", SYSTEM_UI)
